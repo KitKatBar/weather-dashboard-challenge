@@ -1,27 +1,35 @@
-// const city = "San Jose";
-// const url = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`;
+const cityInputEl = $('#city');
+const searchButtonEl = $('#search');
 
-// fetch(url).then(function (response) {
-//     return response.json();
-// }).then(function (data) {
-//     console.log("--------- First request with geolocation --------")
-//     console.log(data);
+//const city = "San Jose";
 
-//     const lat = data[0].lat;
-//     const lon = data[0].lon;
+function getForecast() { 
+    const url = `https://api.openweathermap.org/geo/1.0/direct?q=${cityInputEl.val()}&appid=${apiKey}`;
+    
+    fetch(url).then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        console.log("--------- First request with geolocation --------")
+        console.log(data);
 
-//     console.log(`${lat}, ${lon}`);
+        const lat = data[0].lat;
+        const lon = data[0].lon;
 
-//     const url2 = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
+        console.log(`${lat}, ${lon}`);
 
-//     fetch(url2).then(function (response2) {
-//         return response2.json();
-//     }).then(function (data2) {
-//         console.log("--------- Second request with forecast --------");
-//         console.log(data2);
+        const url2 = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
 
-//         for (let i = 0; i < data2.list.length; i++) {
-//             console.log(data2.list[i].main.temp);
-//         }
-//     })
-// })
+        fetch(url2).then(function (response2) {
+            return response2.json();
+        }).then(function (data2) {
+            console.log("--------- Second request with forecast --------");
+            console.log(data2);
+
+            for (let i = 0; i < data2.list.length; i++) {
+                console.log(data2.list[i].main.temp);
+            }
+        })
+    })
+}
+
+searchButtonEl.on('click', getForecast);
