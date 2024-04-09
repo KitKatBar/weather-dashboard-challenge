@@ -1,5 +1,15 @@
+body {
+    background-color: #1e2020;
+}
+
+.dashboard {
+    background-color: #053349;
+    font-size: 25px;
+}
+
 .search-header {
     font-size: 20px;
+    color: white;
 }
 
 .input {
@@ -16,4 +26,25 @@
 .history {
     width: 100%;
     margin-bottom: 10px;
+}
+
+.current-weather-card {
+    font-size: 18px;
+    color: white;
+    background-color: #082e01;
+    border: 2px solid black;
+}
+
+.forecast-header {
+    font-size: 20px;
+    color: white;
+}
+
+.future-weather-card {
+    font-size: 12px;
+    margin-bottom: 10px;
+    height: 200px;
+    color: white;
+    background-color: #053349;
+    border: 2px solid white;
 }
