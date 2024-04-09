@@ -26,7 +26,7 @@ When you first load the webpage, you will be presented with a header that reads 
 
 ![Initial display of the dashboard on page load](https://github.com/KitKatBar/weather-dashboard-challenge/blob/main/assets/images/initial-display.png?raw=true)
 
-Entering a city and clicking the 'Search' button will display the current weather forecast in a large card and the future weather forecast over the next 5 days in their respective smaller sized cards.  Additionally, your search history will be logged and a button will display along with the name of the city you just searched.  There will also be a 'Clear Search History' button displayed.
+Entering a city and clicking the 'Search' button will display the current weather forecast in a large card and the future weather forecast over the next 5 days in their respective smaller sized cards.  Additionally, your search history will be logged and a button will display along with the name of the city you just searched.  There will also be a 'Clear Search History' button displayed.  Attempting to enter a city that does not exist will display a pop-up message asking you to try again.
 
 ![Display when a city is searched for](https://github.com/KitKatBar/weather-dashboard-challenge/blob/main/assets/images/search-display.png?raw=true)
 

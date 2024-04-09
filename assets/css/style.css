@@ -2,32 +2,45 @@ body {
     background-color: #1e2020;
 }
 
+main {
+    max-width: 90%;
+    height: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Display adjustments made to the dashboard */
 .dashboard {
     background-color: #053349;
     font-size: 25px;
 }
 
+/* City search header */
 .search-header {
     font-size: 20px;
     color: white;
 }
 
+/* Display adjustments to search input box */
 .input {
     width: 100%;
     margin-bottom: 10px;
     padding: 5px;
 }
 
+/* Display adjustments to search button */
 .button {
     width: 100%;
     padding: 5px;
 }
 
+/* Display adjustments to search history buttons */
 .history {
     width: 100%;
     margin-bottom: 10px;
 }
 
+/* Display adjustments to current weather card */
 .current-weather-card {
     font-size: 18px;
     color: white;
@@ -35,11 +48,13 @@ body {
     border: 2px solid black;
 }
 
+/* Display adjustments to future weather card header */
 .forecast-header {
     font-size: 20px;
     color: white;
 }
 
+/* Display adjustments to future weather card */
 .future-weather-card {
     font-size: 12px;
     margin-bottom: 10px;
@@ -47,4 +62,14 @@ body {
     color: white;
     background-color: #053349;
     border: 2px solid white;
+}
+
+/* Footer here cause why not */
+.footer {
+    padding: 30px;
+    clear: both;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+    background-color: #053349;
+    color: #ffffff;
 }

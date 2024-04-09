@@ -1,1 +1,2 @@
+// API key - DO NOT STEAL
 const apiKey = "397580166402d0409bb005c2e2a8126d";
