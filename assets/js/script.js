@@ -19,27 +19,43 @@ function getForecast(city) {
     fetch(cityUrl).then(function (cityResponse) {
         return cityResponse.json();
     }).then(function (cityData) {
-        const lat = cityData[0].lat;
-        const lon = cityData[0].lon;
 
-        const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
+        if (!cityData[0]) {
+            alert("Could not find city ... please try again!")
+        }
 
-        fetch(weatherUrl).then(function (weatherResponse) {
-            return weatherResponse.json();
-        }).then(function (weatherData) {
-            displayCurrentForecast(city, weatherData.list[0]);
-            splitData(weatherData.list);
-        })
+        else {
+            const lat = cityData[0].lat;
+            const lon = cityData[0].lon;
+
+            const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
+
+            fetch(weatherUrl).then(function (weatherResponse) {
+                return weatherResponse.json();
+            }).then(function (weatherData) {
+                displayCurrentForecast(city, weatherData.list[0]);
+                splitData(weatherData.list);
+            })
+
+            addSearchHistory(city);
+        }
+    }).catch(function (error) {
+        console.log(error);
     })
-
-    addSearchHistory(city);
 
     cityInputEl.val('');
 }
 
 function addSearchHistory(city) {
     if (searchHistory.indexOf(city) === -1) {
-        searchHistory.push(city);
+        searchHistory.unshift(city);
+        localStorage.setItem('search-history', JSON.stringify(searchHistory));
+        renderSearchHistory();
+    }
+
+    else {
+        searchHistory.splice(searchHistory.indexOf(city), 1);
+        searchHistory.unshift(city);
         localStorage.setItem('search-history', JSON.stringify(searchHistory));
         renderSearchHistory();
     }
@@ -51,9 +67,13 @@ function renderSearchHistory() {
     }
 
     else {
+
+        searchHistoryEl.text('');
         for (let i = 0; i < searchHistory.length; i++) {
             createSearchHistoryButton(searchHistory[i]);
         }
+
+        clearHistoryEl.text('');
         showClearHistory();
     }
 }
@@ -105,7 +125,7 @@ function displayCurrentForecast(city, weatherData) {
     const description = weatherData.weather[0].description;
 
     const cardEl = $('<div>')
-        .addClass('card');
+        .addClass('card my-3 current-weather-card');
 
     const cardBodyEl = $('<div>')
         .addClass('card-body');
@@ -116,15 +136,15 @@ function displayCurrentForecast(city, weatherData) {
 
     const tempEl = $('<p>')
         .addClass('card-text')
-        .text(`Temperature: ${temp} °F`);
+        .text(`🌡️ Temp: ${temp} °F`);
 
     const windEl = $('<p>')
         .addClass('card-text')
-        .text(`Wind: ${wind} MPH`);
+        .text(`💨 Wind: ${wind} MPH`);
 
     const humidityEl = $('<p>')
         .addClass('card-text')
-        .text(`Humidity: ${humidity} %`);
+        .text(`💧 Humidity: ${humidity} %`);
 
     const iconEl = $('<img>')
         .attr('src', icon)
@@ -147,7 +167,7 @@ function splitData(weatherData) {
         .addClass('col-12');
 
     const headerEl = $('<h3>')
-        .addClass('my-3')
+        .addClass('forecast-header my-3')
         .text('5-Day Forecast:');
 
     futureForecastEl.text('');
@@ -173,7 +193,7 @@ function displayFutureForecast(weatherData) {
         .addClass('five-day-card col-md');
     
     const cardEl = $('<div>')
-        .addClass('card');
+        .addClass('card future-weather-card');
 
     const cardBodyEl = $('<div>')
         .addClass('card-body');
@@ -184,15 +204,15 @@ function displayFutureForecast(weatherData) {
 
     const tempEl = $('<p>')
         .addClass('card-text')
-        .text(`Temperature: ${temp} °F`);
+        .text(`🌡️ Temp: ${temp} °F`);
 
     const windEl = $('<p>')
         .addClass('card-text')
-        .text(`Wind: ${wind} MPH`);
+        .text(`💨 Wind: ${wind} MPH`);
 
     const humidityEl = $('<p>')
         .addClass('card-text')
-        .text(`Humidity: ${humidity} %`);
+        .text(`💧 Humidity: ${humidity} %`);
 
     const iconEl = $('<img>')
         .attr('src', icon)
